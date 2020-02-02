@@ -1,4 +1,4 @@
-""" Command: .porn """
+
 
 from telethon import events
 
