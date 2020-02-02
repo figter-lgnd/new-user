@@ -45,6 +45,7 @@ async def _(event):
 async def _(event):
     if event.fwd_from:
         return
+    await event.delete()
     bot_username = event.pattern_match.group(1)
     i_plus_oneth_result = event.pattern_match.group(2)
     search_query = event.pattern_match.group(3)
@@ -54,7 +55,6 @@ async def _(event):
             search_query
         )
         message = await bot_results[int(i_plus_oneth_result) - 1].click(event.chat_id, reply_to=event.reply_to_msg_id, hide_via=True)
-        await event.delete()
     except Exception as e:
         await event.edit(str(e))
 
@@ -71,46 +71,28 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             buttons = paginate_help(0, borg._plugins, "helpme")
             result = builder.article(
                 "© @meanii",
-                text="{}\n`ℂurrent ℙlugins`: {}".format(
+                text="{}\nℂ𝕦𝕣𝕣𝕖𝕟𝕥𝕝𝕪 𝕃𝕠𝕒𝕕𝕖𝕕 ℙ𝕝𝕦𝕘𝕚𝕟𝕤: {}".format(
                     query, len(borg._plugins)),
                 buttons=buttons,
                 link_preview=True
             )
-        elif query.startswith("tb_btn"):
+        elif query.startswith("meanii"):
             result = builder.article(
-                "Button Parser © @meanii",
-                text=f"powered by @kaito",
+                "@meanii: Noob/xD 👨🏻‍💻",
+                text=f"[meanii](https://telegra.ph/file/e024abfbdc070871b0210.mp4)",
                 buttons=[],
                 link_preview=True
             )
-        elif query.startswith("repo"):
-            result = builder.article(
-                "K A I T O : Deplo button",
-                text=f"IDK",
-                buttons=[
-                    [custom.Button.url("👤Click on the button to deploy K A I T O repo👤", "https://github.com/mitshuhataki/kaito")],
-                ],
-                link_preview=True
-            )  
-        elif query.startswith("K A I TO"):
-            result = builder.article(
-                "@kaitoxd: Bhagwaan Sabko GF De",
-                    text=f"[K A I T O](https://telegra.ph/file/e024abfbdc070871b0210.mp4)",
-                buttons=[],
-                link_preview=True
-            )   
         else:
             result = builder.article(
                 "© @meanii",
-                text="""@Kaitoxd **( Custom Built By** @meanii **)
+                text="""@meanii **( Custom Built By** @meanii **)** 
 **Verified Account:** ✅
-**Zoldyckfamilytm** 
-
-**Pithun 3.8.1 (default, Feb 2 2019, 01:29:42)** 
+**ZoldyckFamilytm:**  [⠀](https://telegra.ph/file/88a9fc26e29332495f8a7.mp4)
+**Pithun 3.7.4 (default, des 02 2020, 00:45:48)** 
 **[GCC 7.4.0]**
-**Talethrun 1.10.10**
-
-**Custom Built Fork:** https://github.com/mitshuhataki/kaito""",
+**Talethrun 1.10.6**
+**Custom Built Fork:** https://github.com/mitshuhataki/kaito/""",
                 buttons=[
                     [custom.Button.url("👤Contact Creator👤", "https://telegram.dog/meanii"), custom.Button.url(
                         "📼Instagram📼", "https://www.instagram.com/mitshuhataki")],
@@ -155,7 +137,7 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
         else:
-            reply_pop_up_alert = "Please get your own @UniBorg, and don't edit my messages!"
+            reply_pop_up_alert = "Please get your own Bot, and don't edit my messages!"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
 
@@ -169,7 +151,7 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         reply_pop_up_alert = help_string if help_string is not None else \
             "No DOCSTRING has been setup for {} plugin".format(plugin_name)
         reply_pop_up_alert += "\n\n Use .unload {} to remove this plugin\n\
-            © @meanii".format(plugin_name)
+            © @r4v4n4".format(plugin_name)
         await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
 
