@@ -1,4 +1,4 @@
-from telethon import events
+'''from telethon import events
 
 @borg.on(events.NewMessage(from_users="@DeezloaderTCBot"))
 async def handler(event):
