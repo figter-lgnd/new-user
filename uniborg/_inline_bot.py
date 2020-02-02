@@ -88,7 +88,7 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 "© @meanii",
                 text="""@meanii **( Custom Built By** @meanii **)** 
 **Verified Account:** ✅
-**ZoldyckFamilytm:**  [⠀](https://telegra.ph/file/88a9fc26e29332495f8a7.mp4)
+**ZoldyckFamilytm:**  [⠀](https://telegra.ph/file/e024abfbdc070871b0210.mp4)
 **Pithun 3.7.4 (default, des 02 2020, 00:45:48)** 
 **[GCC 7.4.0]**
 **Talethrun 1.10.6**
