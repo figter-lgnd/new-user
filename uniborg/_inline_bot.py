@@ -66,11 +66,11 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         builder = event.builder
         result = None
         query = event.text
-        if event.query.user_id == borg.uid and query.startswith("@UniBorg"):
+        if event.query.user_id == borg.uid and query.startswith("@meanii"):
             rev_text = query[::-1]
             buttons = paginate_help(0, borg._plugins, "helpme")
             result = builder.article(
-                "© @UniBorg",
+                "© @meanii",
                 text="{}\n`ℂurrent ℙlugins`: {}".format(
                     query, len(borg._plugins)),
                 buttons=buttons,
@@ -78,47 +78,47 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             )
         elif query.startswith("tb_btn"):
             result = builder.article(
-                "Button Parser © @UniBorg",
-                text=f"powered by @PepeB0t",
+                "Button Parser © @meanii",
+                text=f"powered by @kaito",
                 buttons=[],
                 link_preview=True
             )
         elif query.startswith("repo"):
             result = builder.article(
-                "NeoMatrix90: yeh hai button deploy kar le",
-                text=f"Ganja Sutta on the floor",
+                "K A I T O : Deplo button",
+                text=f"IDK",
                 buttons=[
-                    [custom.Button.url("👤Click on the button to deploy PepeBot repo👤", "https://github.com/prono69/PepeBot")],
+                    [custom.Button.url("👤Click on the button to deploy K A I T O repo👤", "https://github.com/mitshuhataki/kaito")],
                 ],
                 link_preview=True
             )  
-        elif query.startswith("bhoot"):
+        elif query.startswith("K A I TO"):
             result = builder.article(
-                "@kirito6969: Bhagwaan Sabko GF De",
-                text=f"[Bhoot](https://telegra.ph/file/019a2eab3d66d39c92a75.mp4)",
+                "@kaitoxd: Bhagwaan Sabko GF De",
+                    text=f"[K A I T O](https://telegra.ph/file/e024abfbdc070871b0210.mp4)",
                 buttons=[],
                 link_preview=True
             )   
         else:
             result = builder.article(
-                "© @UniBorg",
-                text="""@PepeB0t **( Custom Built By** @kirito6969 **)
+                "© @meanii",
+                text="""@Kaitoxd **( Custom Built By** @meanii **)
 **Verified Account:** ✅
-**Official Website:** https://prono69.github.io/PepeBot/
+**Zoldyckfamilytm** 
 
-**Pithun 3.8.1 (default, Sep 12 2019, 01:19:52)** 
+**Pithun 3.8.1 (default, Feb 2 2019, 01:29:42)** 
 **[GCC 7.4.0]**
 **Talethrun 1.10.10**
 
-**Custom Built Fork:** https://github.com/prono69/Pornhub""",
+**Custom Built Fork:** https://github.com/mitshuhataki/kaito""",
                 buttons=[
-                    [custom.Button.url("👤Contact Creator👤", "https://telegram.dog/kirito6969"), custom.Button.url(
-                        "📼Ravana Audio Memes📼", "https://t.me/tgaudiomemes")],
-                    [custom.Button.url("👨‍💻Source Code👨‍💻", "https://github.com/prono69/PepeBot"), custom.Button.url(
-                        "❕❗Deploy Me❗❕", "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fravana69%2FPornHub%2F&template=https%3A%2F%2Fgithub.com%2Fravana69%2FPornHub%2F")],
-                    [custom.Button.url("🔰Update Fork🔰", "tg://need_update_for_some_feature"), custom.Button.url(
+                    [custom.Button.url("👤Contact Creator👤", "https://telegram.dog/meanii"), custom.Button.url(
+                        "📼Instagram📼", "https://www.instagram.com/mitshuhataki")],
+                    [custom.Button.url("👨‍💻Website👨‍💻", "https://gizmostuffgstuff.blogspot.com"), custom.Button.url(
+                        "❕❗Deploy Me❗❕", "https://dashboard.heroku.com/new?button-url=https%3A%2F%2Fgithub.com%2Fzoldyckfamily%2Fzoldyck&template=https%3A%2F%2Fgithub.com%2Fzoldyckfamily%2Fzoldyck")],
+                    [custom.Button.url("🌚Youtube Channel🌚", "https://www.youtube.com/channel/UC6FsUGrV-fJtWqRykYfJscg"), custom.Button.url(
                         "✳️Fork Boost✳️", "tg://some_unsupported_feature"), custom.Button.url(
-                        "♻️Refresh Heroku♻️", "tg://chutiya")]
+                        "♻️Refresh Heroku♻️", "tg://idk")]
                 ],
                 link_preview=True
             )
@@ -137,7 +137,7 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             # https://t.me/TelethonChat/115200
             await event.edit(buttons=buttons)
         else:
-            reply_pop_up_alert = "⚠️ Warning: Don't Press Any Buttons ⚠️\n\nCustom Fork: https://github.com/prono69/PepeBot\n\n\nNote: Bas kar BetiChod, Maa Ke Laude, Madarchod"
+            reply_pop_up_alert = "⚠️ Warning: Don't Press Any Buttons ⚠️"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
     @tgbot.on(events.callbackquery.CallbackQuery(  # pylint:disable=E0602
@@ -169,7 +169,7 @@ if Config.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         reply_pop_up_alert = help_string if help_string is not None else \
             "No DOCSTRING has been setup for {} plugin".format(plugin_name)
         reply_pop_up_alert += "\n\n Use .unload {} to remove this plugin\n\
-            © @NeoMatrix90".format(plugin_name)
+            © @meanii".format(plugin_name)
         await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
 
