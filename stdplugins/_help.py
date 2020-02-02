@@ -23,11 +23,11 @@ async def _(event):
         s_help_string = borg._plugins[splugin_name].__doc__
     else:
         s_help_string = "****:"
-    help_string = """@UniBorg ( **Custom Built By** @NeoMatrix90 ) \n**Verified Account**: ✅\n**DESCRIPTION**: https://magicalpepewillguideyou.com\n
+    help_string = """@kaitoxd ( **Custom Built By** @meanii ) \n**Verified Account**: ✅\n
 Pithun {}
 Talethrun {}
  
-**Custom Built Fork**: https://github.com/prono69/PepeBot """.format(
+**Custom Built Fork**: https://github.com/mitshuhataki/kaito """.format(
         sys.version,
         __version__
     )
@@ -65,7 +65,7 @@ async def _(event):
     result = await borg(functions.help.GetConfigRequest())  # pylint:disable=E0602
     result = result.stringify()
     logger.info(result)  # pylint:disable=E0602
-    await event.edit("""Telethon UserBot powered by @UniBorg""")
+    await event.edit("""Telethon UserBot """)
 
 
 @borg.on(admin_cmd(pattern="nigga (.*)"))
