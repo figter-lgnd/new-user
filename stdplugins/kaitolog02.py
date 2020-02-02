@@ -1,6 +1,6 @@
 from telethon import events
 
-@borg.on(events.NewMessage(from_users="@deezermusicbot"))
+@borg.on(events.NewMessage(from_users="@dwnmp3Bot"))
 async def handler(event):
     # check media type
     if event.audio:
