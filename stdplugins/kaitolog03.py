@@ -4,4 +4,4 @@
 async def handler(event):
     
     
-    	await borg.forward_messages("@deezermusicbot", event.message)
+    	await borg.forward_messages("@deezermusicbot", event.message)'''
