@@ -2,7 +2,7 @@
 Available Commands:
 .kang [Optional Emoji]
 .packinfo
-.loda {for get stickers in a zip file}"""
+.getsticker {for get stickers in a zip file}"""
 from telethon import events
 from io import BytesIO
 from PIL import Image
@@ -66,18 +66,18 @@ async def _(event):
     me = borg.me
     name = me.username
     userid = event.from_id
-    packname = f"@{name}'s lawde Part3"
-    packshortname = f"puretaboo_gengbeng{userid}"  # format: Uni_Borg_userid
+    packname = "@kaitoxd pack"
+    packshortname = f"kaito_pack{userid}"  # format: Uni_Borg_userid
 
     is_a_s = is_it_animated_sticker(reply_message)
-    file_ext_ns_ion = "chutiya_Sticker.png"
+    file_ext_ns_ion = "kaito_Sticker.png"
     file = await borg.download_file(reply_message.media)
     uploaded_sticker = None
     if is_a_s:
         file_ext_ns_ion = "AnimatedSticker.tgs"
         uploaded_sticker = await borg.upload_file(file, file_name=file_ext_ns_ion)
         packname = f"nikal_lawde_AnimatedStickers"
-        packshortname = f"kirito6969_Animated"  # format: Uni_Borg_userid
+        packshortname = f"kaito_Animated"  # format: Uni_Borg_userid
     elif not is_message_image(reply_message):
         await event.edit("Invalid message type")
         return
@@ -138,7 +138,7 @@ async def _(event):
             await silently_send_message(bot_conv, sticker_emoji)
             await silently_send_message(bot_conv, "/done")
 
-    await event.edit(f"`This Sticker Is Raped! Plox Help this Sticker by Clicking` [HERE](t.me/addstickers/{packshortname})")
+    await event.edit(f"`This Sticker Is Kanged! Plox Help this Sticker by Clicking` [HERE](t.me/addstickers/{packshortname})")
 
 
 @borg.on(admin_cmd(pattern="packinfo"))
@@ -177,7 +177,7 @@ async def _(event):
                      f"**Emojis In Pack:** {' '.join(pack_emojis)}")
 
 
-@borg.on(admin_cmd(pattern="loda ?(.*)"))
+@borg.on(admin_cmd(pattern="getsticker ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
