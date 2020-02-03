@@ -3,7 +3,7 @@
 
 from telethon import events, functions, types
 
-@borg.on(events.NewMessage(pattern=r"\listnames", outgoing=True))
+@borg.on(events.NewMessage(pattern=r"\-listnames", outgoing=True))
 async def _(event):
     if event.fwd_from:
         return
