@@ -31,7 +31,7 @@ async def _(event):
        #reply_message = await event.get_reply_message() 
     
      
-    chat =-347288520     #change you private group id to store notes
+    chat =-1001337955406     #change you private group id to store notes
     sender = reply_message.sender
     await event.delete()
     processing = await event.reply("```Processing...```")
