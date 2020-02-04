@@ -10,12 +10,13 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.account import UpdateNotifySettingsRequest
 from uniborg.util import admin_cmd
 
-@borg.on(admin_cmd(pattern="mean?(.*)"))
+@borg.on(admin_cmd(pattern="mean?(.*)",allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return 
-    
-    await event.edit("```Processing...```")
+    await event.delete()
+    process = await event.reply("```Processing...```")
+    await process.delete()
     chat = "@UrbanDictionaryBot"
     meanii = event.pattern_match.group(1)
 
