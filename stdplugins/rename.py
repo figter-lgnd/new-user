@@ -1,8 +1,8 @@
 """Rename Telegram Files
 Syntax:
-.rn file.name
+.rnupload file.name
 .rnstreamupload file.name
-.rndlup """
+By @Ck_ATR"""
 
 import asyncio
 import time
@@ -19,7 +19,7 @@ from uniborg.util import progress, humanbytes, time_formatter, admin_cmd
 thumb_image_path = Config.TMP_DOWNLOAD_DIRECTORY + "/thumb_image.jpg"
 
 
-@borg.on(admin_cmd(pattern="rndlup (.*)"))
+@borg.on(admin_cmd(pattern="rndlup (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -91,12 +91,11 @@ async def _(event):
             await event.edit("Downloaded in {} seconds. Uploaded in {} seconds.".format(ms_dl, ms_two))
         else:
             await event.edit("File Not Found {}".format(input_str))
-            await asyncio.sleep(5)
     else:
         await mone.edit("Incorrect URL\n {}".format(input_str))
 
 
-@borg.on(admin_cmd(pattern="rn (.*)"))
+@borg.on(admin_cmd(pattern="rnupload (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -147,7 +146,7 @@ async def _(event):
         await event.edit("Syntax // .rnupload file.name as reply to a Telegram media")
 
 
-@borg.on(admin_cmd(pattern="rnstreamupload (.*)"))
+@borg.on(admin_cmd(pattern="rnstreamupload (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
