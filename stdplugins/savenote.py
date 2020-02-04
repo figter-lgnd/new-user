@@ -12,7 +12,7 @@ from uniborg.util import admin_cmd
 from telethon.utils import pack_bot_file_id
 
 
-@borg.on(admin_cmd(pattern="save ?(.*)"))
+@borg.on(admin_cmd(pattern="save ?(.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return 
@@ -33,9 +33,9 @@ async def _(event):
      
     chat =-347288520     #change you private group id to store notes
     sender = reply_message.sender
-    
-    await event.edit("```Processing...```")
-    await event.edit("Note `{}` saved successfully 📝\nYour note Source from this user ID 👉🏻 `{}`".format(notename,str(reply_message.from_id)))
+    await event.delete()
+    processing = await event.reply("```Processing...```")
+    await processing.edit("Note `{}` saved successfully 📝\nYour note Source from this user ID 👉🏻 `{}`".format(notename,str(reply_message.from_id)))
     
     async with borg.conversation(chat) as conv:
           try:     
