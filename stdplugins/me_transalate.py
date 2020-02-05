@@ -2,7 +2,6 @@
 Available Commands:
 .tr LanguageCode as reply to a message
 .tr LangaugeCode | text to translate
-For SUDO user only
 Made by @meanii 
 Please Don't remove credit name 
 """
