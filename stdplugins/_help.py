@@ -1,12 +1,7 @@
-"""**Know Your UniBorg**
-◇ list of all loaded plugins
-◆ `.info`\n
-◇ to know Data Center
-◆ `.dc`\n
-◇ powered by
-◆ `.config`\n
-◇ to know syntax
-◆ `.nigga` <plugin name>
+""" 
+Syntax: .info .help .howto
+Customized by @meanii 
+Please Don't remove credit name 
 """
 
 import sys
@@ -58,24 +53,24 @@ async def _(event):
                      f"This Datacenter : `{result.this_dc}`")
 
 
-@borg.on(admin_cmd(pattern="config"))  # pylint:disable=E0602
+@borg.on(events.NewMessage(pattern=r"\.help(.*)",incoming=True))
 async def _(event):
     if event.fwd_from:
         return
     result = await borg(functions.help.GetConfigRequest())  # pylint:disable=E0602
     result = result.stringify()
     logger.info(result)  # pylint:disable=E0602
-    await event.edit("""Telethon UserBot """)
+    await event.reply("Haye, My name is kaito 👨🏻‍💻!!\n👉🏻I'm Userbot Customized by @meanii\n👉🏻You can use following cammands.\n\n👉🏻`.ud` To urban dictionary\n👉🏻`.ddg` <Query> To Duck Duck GO 🦆\n👉🏻`.gs` <Query> To Google Search\n👉🏻`.gi` <Query> To Google Image Search\n👉🏻`.grs`(with reply image) To Google Reverse Search\n👉🏻`.qbot` To Quotly\n👉🏻`.anii` To Animation sticker to Video\n👉🏻`.download` To Downlaod file\n👉🏻`.upload` To upload file\n👉🏻`.howto`<plugin name> To know about and cmds about Plugins\n👉🏻`.help` For your help! 😉\n👉🏻 `.info` to know about more.\n\n🌚**Sudo Commands**\n👉🏻`.stat` To know how many connected current users, bots, channels & Groups. \n👉🏻`.exec` <cmd> For Bash Commands.\n👉🏻`.cpin` To pin message.\n👉🏻`.type`<Your Words> To typing as typewriter.\n👉🏻`.spam`<num> To Spam")
 
 
-@borg.on(admin_cmd(pattern="nigga (.*)"))
+@borg.on(events.NewMessage(pattern=r"\.howto?(.*)",incoming=True))
 async def _(event):
     if event.fwd_from:
         return
     plugin_name = event.pattern_match.group(1)
     if plugin_name in borg._plugins:
         help_string = borg._plugins[plugin_name].__doc__
-        unload_string = f"Use `.unloda {plugin_name}` to remove this plugin.\n         © @kirito6969"
+        unload_string = f"Use `.unload {plugin_name}` to remove this plugin."
         if help_string:
             plugin_syntax = f"Syntax for plugin **{plugin_name}**:\n\n{help_string}\n{unload_string}"
         else:
