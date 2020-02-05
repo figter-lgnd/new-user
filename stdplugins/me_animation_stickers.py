@@ -1,5 +1,4 @@
 """This will convert anime. sticker to video
-For all user
 Syntax: .anii with reply
 Made by @meanii 
 Please Don't remove credit name 
