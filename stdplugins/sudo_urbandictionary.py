@@ -1,5 +1,5 @@
 """Urban Dictionary V2.0 
-Syntax: .mean Query
+Syntax: .sudoud Query
 Made by @meanii 
 Please Don't remove credit name 
 """
