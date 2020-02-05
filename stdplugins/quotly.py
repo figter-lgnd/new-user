@@ -1,4 +1,8 @@
-"""QuotLy: Avaible commands: .qbot
+"""
+For all user
+Syntax: .qbot with reply
+Made by @meanii 
+Please Don't remove credit name 
 """
 import datetime
 from telethon import events
@@ -6,23 +10,23 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.account import UpdateNotifySettingsRequest
 from uniborg.util import admin_cmd
 
-@borg.on(admin_cmd(pattern="sudoqbot ?(.*)"))
+@borg.on(events.NewMessage(pattern=r"\.qbot(.*)",incoming=True))
 async def _(event):
     if event.fwd_from:
         return 
     if not event.reply_to_msg_id:
-       await event.edit("```Reply to any user message.```")
+       await event.reply("```Reply to any user message.```")
        return
     reply_message = await event.get_reply_message() 
     if not reply_message.text:
-       await event.edit("```Reply to text message```")
+       await event.reply("```Reply to text message```")
        return
     chat = "@QuotLyBot"
     sender = reply_message.sender
     if reply_message.sender.bot:
-       await event.edit("```Reply to actual users message.```")
+       await event.reply("```Reply to actual users message.```")
        return
-    await event.edit("```Making a Quote```")
+    await event.reply("```Making a Quote```")
     async with event.client.conversation(chat) as conv:
           try:     
               response = conv.wait_event(events.NewMessage(incoming=True,from_users=1031952739))
