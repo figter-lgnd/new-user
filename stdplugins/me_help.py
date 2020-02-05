@@ -1,5 +1,5 @@
 """ 
-Syntax: .info .help .howto
+Syntax: .sinfo .help .showto
 Customized by @meanii 
 Please Don't remove credit name 
 """
@@ -9,7 +9,7 @@ from telethon import events, functions, __version__
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="info ?(.*)"))  # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="sinfo ?(.*)"))  # pylint:disable=E0602
 async def _(event):
     if event.fwd_from:
         return
@@ -63,7 +63,7 @@ async def _(event):
     await event.reply("Haye, My name is kaito 👨🏻‍💻!!\n👉🏻I'm Userbot Customized by @meanii\n👉🏻You can use following cammands.\n\n👉🏻`.ud` To urban dictionary\n👉🏻`.ddg` <Query> To Duck Duck GO 🦆\n👉🏻`.gs` <Query> To Google Search\n👉🏻`.gi` <Query> To Google Image Search\n👉🏻`.grs`(with reply image) To Google Reverse Search\n👉🏻`.qbot` To Quotly\n👉🏻`.anii` To Animation sticker to Video\n👉🏻`.download` To Downlaod file\n👉🏻`.upload` To upload file\n👉🏻`.howto`<plugin name> To know about and cmds about Plugins\n👉🏻`.help` For your help! 😉\n👉🏻 `.info` to know about more.\n\n🌚**Sudo Commands**\n👉🏻`.stat` To know how many connected current users, bots, channels & Groups. \n👉🏻`.exec` <cmd> For Bash Commands.\n👉🏻`.cpin` To pin message.\n👉🏻`.type`<Your Words> To typing as typewriter.\n👉🏻`.spam`<num> To Spam")
 
 
-@borg.on(admin_cmd(pattern="howto ?(.*)"))
+@borg.on(admin_cmd(pattern="showto ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
