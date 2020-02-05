@@ -1,11 +1,14 @@
 """Pins the replied message
-Syntax: .cpin [LOUD]"""
+Syntax: .cpin [LOUD]
+For SUDO users
+Customized by: @meanii
+"""
 from telethon import events
 from telethon.tl import functions, types
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd("cpin ?(.*)"))
+@borg.on(admin_cmd("cpin ?(.*)",allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -22,8 +25,8 @@ async def _(event):
                 silent
             ))
         except Exception as e:
-            await event.edit(str(e))
+            await event.reply(str(e))
         else:
             await event.delete()
     else:
-        await event.edit("Reply to a message to pin the message in this Channel.")
+        await event.reply("Reply to a message to pin the message in this Channel.")
