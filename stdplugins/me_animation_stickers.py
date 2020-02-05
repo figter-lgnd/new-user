@@ -1,6 +1,6 @@
-"""
+"""This will convert anime. sticker to video
 For all user
-Syntax: .qbot with reply
+Syntax: .anii with reply
 Made by @meanii 
 Please Don't remove credit name 
 """
@@ -14,6 +14,7 @@ from uniborg.util import admin_cmd
 async def _(event):
     if event.fwd_from:
         return 
+    
     if not event.reply_to_msg_id:
        await event.reply("```Reply to any user message.```")
        return
@@ -21,6 +22,9 @@ async def _(event):
     if not reply_message.media:
        await event.reply("```Reply to text message```")
        return
+    await event.delete()
+    process = await event.reply("```Converting...```")
+    await process.delete()
     chat = "@asticker2vid_bot"
     sender = reply_message.sender
     if reply_message.sender.bot:
