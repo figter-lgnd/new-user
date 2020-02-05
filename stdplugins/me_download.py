@@ -24,7 +24,7 @@ import logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.WARN)
 
-@borg.on(admin_cmd(pattern="download ?(.*)", allow_sudo=True))
+@borg.on(admin_cmd(pattern="download ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
