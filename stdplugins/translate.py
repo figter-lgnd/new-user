@@ -2,6 +2,7 @@
 Available Commands:
 .tr LanguageCode as reply to a message
 .tr LangaugeCode | text to translate
+For all users
 Made by @meanii 
 Please Don't remove credit name 
 """
