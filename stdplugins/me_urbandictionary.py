@@ -1,6 +1,6 @@
 """Urban Dictionary V2.0 
 For sudo users only
-Syntax: .sudoud Query
+Syntax: .ud Query
 Made by @meanii 
 Please Don't remove credit name 
 """
@@ -11,7 +11,7 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.account import UpdateNotifySettingsRequest
 from uniborg.util import admin_cmd
 
-@borg.on(admin_cmd(pattern="sudoud?(.*)",allow_sudo=True))
+@borg.on(admin_cmd(pattern="ud?(.*)",allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return 
