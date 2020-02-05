@@ -1,6 +1,6 @@
 """Duck Duck Go  
 For all users
-Syntax: .sudoud Query
+Syntax: .ddg Query
 customized by @meanii 
 Please Don't remove credit name 
 """
