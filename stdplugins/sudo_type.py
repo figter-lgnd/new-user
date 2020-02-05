@@ -5,7 +5,7 @@ import asyncio
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="type (.*)", allow_sudo=True))
+@borg.on(admin_cmd(pattern="sudotype (.*)", allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
