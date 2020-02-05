@@ -1,8 +1,10 @@
-"""Execute GNU/Linux commands inside Telegram
-Syntax: .exec Code"""
-# This Source Code Form is subject to the terms of the Mozilla Public
-# License, v. 2.0. If a copy of the MPL was not distributed with this
-# file, You can obtain one at http://mozilla.org/MPL/2.0/.
+"""
+Syntax:
+.exec <cmd>
+For SUDO Users only
+customized by @meanii 
+Please Don't remove credit name 
+"""
 from telethon import events
 import subprocess
 from telethon.errors import MessageEmptyError, MessageTooLongError, MessageNotModifiedError
@@ -14,7 +16,7 @@ import logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.WARN)
 
-@borg.on(admin_cmd(pattern="exec ?(.*)"))
+@borg.on(admin_cmd(pattern="exec ?(.*)",allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -34,7 +36,7 @@ async def _(event):
         e = "No Error"
     o = stdout.decode()
     if not o:
-        o = "**Tip**: \n`Nikal Lawde, Pehli Fursat Mei Nikal BSDK.`"
+        o = "**Tip**: \n`.help for help`"
     else:
         _o = o.split("\n")
         o = "`\n".join(_o)
@@ -51,4 +53,4 @@ async def _(event):
                 reply_to=reply_to_id
             )
             await event.delete()
-    await event.edit(OUTPUT)
+    await event.reply(OUTPUT)
