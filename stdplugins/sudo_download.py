@@ -1,7 +1,10 @@
 """Download Files to your local server
 Syntax:
 .download
-.download url | file.name to download files from a Public Link"""
+.download url | file.name to download files from a Public Link
+customized by @meanii 
+Please Don't remove credit name 
+"""
 
 import asyncio
 import math
