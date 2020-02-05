@@ -1,4 +1,5 @@
 """Urban Dictionary V2.0 
+For all user
 Syntax: .ud Query
 Made by @meanii 
 Please Don't remove credit name 
