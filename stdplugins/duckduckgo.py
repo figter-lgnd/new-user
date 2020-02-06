@@ -11,8 +11,8 @@ import requests
 import json
 from uniborg.util import admin_cmd
 
-
-@borg.on(events.NewMessage(pattern=r"\.ddg (.*)",incoming=True))
+@borg.on(admin_cmd(pattern="ddk?(.*)"))
+@borg.on(events.NewMessage(pattern=r"\.ddg?(.*)",incoming=True))
 async def _(event):
     if event.fwd_from:
         return
