@@ -10,6 +10,7 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.account import UpdateNotifySettingsRequest
 from uniborg.util import admin_cmd
 
+@borg.on(admin_cmd(pattern="qbot ?(.*)"))
 @borg.on(events.NewMessage(pattern=r"\.qbot(.*)",incoming=True))
 async def _(event):
     if event.fwd_from:
