@@ -1,9 +1,11 @@
-# This Source Code Form is subject to the terms of the Mozilla Public
-# License, v. 2.0. If a copy of the MPL was not distributed with this
-# file, You can obtain one at http://mozilla.org/MPL/2.0/.
-
+"""
+.minfo(with reply) To get message info  
+For all USER
+Customized by @meanii 
+Please Don't remove credit name 
+"""
 import string
-
+from uniborg.util import admin_cmd
 from telethon import events
 from telethon.utils import add_surrogate
 from telethon.tl.types import MessageEntityPre
@@ -85,14 +87,14 @@ def yaml_format(obj, indent=0):
 
     return ''.join(result)
 
-
-@borg.on(events.NewMessage(pattern=r"\.new", outgoing=True))
+@borg.on(admin_cmd(pattern="minfo(.*)"))
+@borg.on(events.NewMessage(pattern=r"\.minfo", incoming=True))
 async def _(event):
     if not event.message.is_reply:
         return
     msg = await event.message.get_reply_message()
     yaml_text = yaml_format(msg)
-    await event.edit(
+    await event.reply(
         yaml_text,
         parse_mode=parse_pre
     )
