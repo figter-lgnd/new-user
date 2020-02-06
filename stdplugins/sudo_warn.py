@@ -1,8 +1,10 @@
-"""Warn Module for PepeBot
-Commands:
-	`.iwarn to warn
-	.g_warns
-	.r_warns`"""
+"""Warn the users by replied message
+Syntax: `.warn` <Reason>
+        `.iswarn` by replying to know user got warn or not.
+        `.rwarn` to remove warns.
+For SUDO users
+Customized by: @meanii
+"""
 	
 import asyncio
 import html
@@ -13,11 +15,11 @@ from uniborg.util import admin_cmd
 import sql_helpers.warns_sql as sql
 
 
-@borg.on(admin_cmd(pattern="iwarn (.*)"))
+@borg.on(admin_cmd(pattern="warn ?(.*)",allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
-    warn_reason = event.pattern_match.group(1)
+     warn_reason = event.pattern_match.group(1)
     reply_message = await event.get_reply_message()
     limit, soft_warn = sql.get_warn_setting(event.chat_id)
     num_warns, reasons = sql.warn_user(reply_message.from_id, event.chat_id, warn_reason)
@@ -34,10 +36,10 @@ async def _(event):
         if warn_reason:
             reply += "\nReason for last warn:\n{}".format(html.escape(warn_reason))
     #
-    await event.edit(reply, parse_mode="html")
+    await event.reply(reply, parse_mode="html")
 
 
-@borg.on(admin_cmd(pattern="g_warns"))
+@borg.on(admin_cmd(pattern="iswarn",allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -47,22 +49,20 @@ async def _(event):
         num_warns, reasons = result
         limit, soft_warn = sql.get_warn_setting(event.chat_id)
         if reasons:
-            text = "This user has {}/{} warnings, for the following reasons:".format(num_warns, limit)
+            text = "Yaas,This user has {}/{} warnings, for the following reasons:".format(num_warns, limit)
             text += "\r\n"
             text += reasons
-            await event.edit(text)
+            await event.reply(text)
         else:
-            await event.edit("this user has {} / {} warning, but no reasons for any of them.".format(num_warns, limit))
+            await event.reply("Yass,This user has {} / {} warning, but no reasons for any of them.".format(num_warns, limit))
     else:
-        await event.edit("`This user hasn't got any warnings!`")
+        await event.reply("`No,This user hasn't got any warnings!`")
 
 
-@borg.on(admin_cmd(pattern="r_warns"))
+@borg.on(admin_cmd(pattern="rwarn",allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
     reply_message = await event.get_reply_message()
     sql.reset_warns(reply_message.from_id, event.chat_id)
-    await event.edit("`Warnings have been reset!`")
-
-
+    await event.reply("`Warnings have been reset!`")
