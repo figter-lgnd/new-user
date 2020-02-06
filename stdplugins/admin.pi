@@ -32,7 +32,7 @@ Usage: Retrieves all users in a chat.
 Usage: Sends the last deleted message in group."
 
 Userbot module to help you manage a group.
-  © [cHAuHaN](tg://user?id=606846495)"""
+"""
 
 from asyncio import sleep
 from os import remove
