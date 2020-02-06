@@ -2,7 +2,11 @@
 Available Commands:
 .kang [Optional Emoji]
 .packinfo
-.getsticker {for get stickers in a zip file}"""
+.getpack {for get stickers in a zip file}
+Customized by @meanii 
+Please Don't remove credit name 
+"""
+
 from telethon import events
 from io import BytesIO
 from PIL import Image
@@ -51,14 +55,15 @@ KANGING_STR = [
 ]
 
 @borg.on(admin_cmd(pattern="kang ?(.*)"))
+@borg.on(events.NewMessage(pattern=r"\.kang ?(.*)",incoming=True))
 async def _(event):
     if event.fwd_from:
         return
     if not event.is_reply:
-        await event.edit("Reply to a photo to add to my personal sticker pack.")
+        await event.reply("Reply to a photo to add to my personal sticker pack.")
         return
     reply_message = await event.get_reply_message()
-    sticker_emoji = "🍆"
+    sticker_emoji = "🙃"
     input_str = event.pattern_match.group(1)
     if input_str:
         sticker_emoji = input_str
@@ -66,20 +71,20 @@ async def _(event):
     me = borg.me
     name = me.username
     userid = event.from_id
-    packname = "@kaitoxd pack"
-    packshortname = f"kaito_pack{userid}"  # format: Uni_Borg_userid
+    packname = f"@allukabot pack {userid}"
+    packshortname = f"allukabot_pack{userid}"  
 
     is_a_s = is_it_animated_sticker(reply_message)
-    file_ext_ns_ion = "kaito_Sticker.png"
+    file_ext_ns_ion = "allukabot_Sticker.png"
     file = await borg.download_file(reply_message.media)
     uploaded_sticker = None
     if is_a_s:
         file_ext_ns_ion = "AnimatedSticker.tgs"
         uploaded_sticker = await borg.upload_file(file, file_name=file_ext_ns_ion)
-        packname = f"nikal_lawde_AnimatedStickers"
-        packshortname = f"kaito_Animated"  # format: Uni_Borg_userid
+        packname = f"allukabot_AnimatedStickers"
+        packshortname = f"allukabot_Animated"  
     elif not is_message_image(reply_message):
-        await event.edit("Invalid message type")
+        await event.reply("Invalid message type")
         return
     else:
         with BytesIO(file) as mem_file, BytesIO() as sticker:
@@ -87,7 +92,7 @@ async def _(event):
             sticker.seek(0)
             uploaded_sticker = await borg.upload_file(sticker, file_name=file_ext_ns_ion)
 
-    await event.edit(random.choice(KANGING_STR))
+    await event.reply(random.choice(KANGING_STR))
 
     async with borg.conversation("@Stickers") as bot_conv:
         now = datetime.datetime.now()
@@ -99,11 +104,11 @@ async def _(event):
             else:
                 response = await silently_send_message(bot_conv, "/newpack")
             if "Yay!" not in response.text:
-                await event.edit(f"**FAILED**! @Stickers replied: {response.text}")
+                await event.reply(f"**FAILED**! @Stickers replied: {response.text}")
                 return
             response = await silently_send_message(bot_conv, packname)
             if not response.text.startswith("Alright!"):
-                await event.edit(f"**FAILED**! @Stickers replied: {response.text}")
+                await event.reply(f"**FAILED**! @Stickers replied: {response.text}")
                 return
             w = await bot_conv.send_file(
                 file=uploaded_sticker,
@@ -112,7 +117,7 @@ async def _(event):
             )
             response = await bot_conv.get_response()
             if "Sorry" in response.text:
-                await event.edit(f"**FAILED**! @Stickers replied: {response.text}")
+                await event.reply(f"**FAILED**! @Stickers replied: {response.text}")
                 return
             await silently_send_message(bot_conv, sticker_emoji)
             await silently_send_message(bot_conv, "/publish")
@@ -120,7 +125,7 @@ async def _(event):
             await silently_send_message(bot_conv, "/skip")
             response = await silently_send_message(bot_conv, packshortname)
             if response.text == "Sorry, this short name is already taken.":
-                await event.edit(f"**FAILED**! @Stickers replied: {response.text}")
+                await event.reply(f"**FAILED**! @Stickers replied: {response.text}")
                 return
         else:
             await silently_send_message(bot_conv, "/cancel")
@@ -133,29 +138,30 @@ async def _(event):
             )
             response = await bot_conv.get_response()
             if "Sorry" in response.text:
-                await event.edit(f"**FAILED**! @Stickers replied: {response.text}")
+                await event.reply(f"**FAILED**! @Stickers replied: {response.text}")
                 return
             await silently_send_message(bot_conv, sticker_emoji)
             await silently_send_message(bot_conv, "/done")
 
-    await event.edit(f"`This Sticker Is Kanged! Plox Help this Sticker by Clicking` [HERE](t.me/addstickers/{packshortname})")
+    await event.reply(f"`This Sticker Is Kanged! Plox Help this Sticker by Clicking` [HERE](t.me/addstickers/{packshortname})")
 
 
 @borg.on(admin_cmd(pattern="packinfo"))
+@borg.on(events.NewMessage(pattern=r"\.packinfo (.*)",incoming=True))
 async def _(event):
     if event.fwd_from:
         return
     if not event.is_reply:
-        await event.edit("Reply to any sticker to get it's pack info.")
+        await event.reply("Reply to any sticker to get it's pack info.")
         return
     rep_msg = await event.get_reply_message()
     if not rep_msg.document:
-        await event.edit("Reply to any sticker to get it's pack info.")
+        await event.reply("Reply to any sticker to get it's pack info.")
         return
     stickerset_attr_s = rep_msg.document.attributes
     stickerset_attr = find_instance(stickerset_attr_s, DocumentAttributeSticker)
     if not stickerset_attr.stickerset:
-        await event.edit("sticker does not belong to a pack.")
+        await event.reply("sticker does not belong to a pack.")
         return
     get_stickerset = await borg(
         GetStickerSetRequest(
@@ -169,7 +175,7 @@ async def _(event):
     for document_sticker in get_stickerset.packs:
         if document_sticker.emoticon not in pack_emojis:
             pack_emojis.append(document_sticker.emoticon)
-    await event.edit(f"**Sticker Title:** `{get_stickerset.set.title}\n`"
+    await event.reply(f"**Sticker Title:** `{get_stickerset.set.title}\n`"
                      f"**Sticker Short Name:** `{get_stickerset.set.short_name}`\n"
                      f"**Official:** `{get_stickerset.set.official}`\n"
                      f"**Archived:** `{get_stickerset.set.archived}`\n"
@@ -177,7 +183,8 @@ async def _(event):
                      f"**Emojis In Pack:** {' '.join(pack_emojis)}")
 
 
-@borg.on(admin_cmd(pattern="getsticker ?(.*)"))
+@borg.on(admin_cmd(pattern="getpack ?(.*)"))
+@borg.on(events.NewMessage(pattern=r"\.getpack ?(.*)",incoming=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -186,7 +193,7 @@ async def _(event):
         os.makedirs(Config.TMP_DOWNLOAD_DIRECTORY)
     if event.reply_to_msg_id:
         reply_message = await event.get_reply_message()
-        # https://gist.github.com/udf/e4e3dbb2e831c8b580d8fddd312714f7
+        
         if not reply_message.sticker:
             return
         sticker = reply_message.sticker
@@ -196,7 +203,7 @@ async def _(event):
             return
         is_a_s = is_it_animated_sticker(reply_message)
         file_ext_ns_ion = "webp"
-        file_caption = "`You are my Nigga`"
+        file_caption = "`You are nub`"
         if is_a_s:
             file_ext_ns_ion = "tgs"
             file_caption = "Forward the ZIP file to @AnimatedStickersRoBot to get lottIE JSON containing the vector information."
@@ -221,7 +228,7 @@ async def _(event):
                 download(document, emojis, Config.TMP_DOWNLOAD_DIRECTORY + sticker_set.set.short_name, f"{i:03d}.{file_ext_ns_ion}")
             ) for i, document in enumerate(sticker_set.documents)
         ]
-        await event.edit(f"Downloading {sticker_set.set.count} sticker(s) to .{Config.TMP_DOWNLOAD_DIRECTORY}{sticker_set.set.short_name}...")
+        await event.reply(f"Downloading {sticker_set.set.count} sticker(s) to .{Config.TMP_DOWNLOAD_DIRECTORY}{sticker_set.set.short_name}...")
         num_tasks = len(pending_tasks)
         while 1:
             done, pending_tasks = await asyncio.wait(pending_tasks, timeout=2.5,
