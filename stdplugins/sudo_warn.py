@@ -6,6 +6,8 @@ For SUDO users
 Customized by: @meanii
 """
 	
+
+	
 import asyncio
 import html
 from telethon import events
@@ -19,7 +21,7 @@ import sql_helpers.warns_sql as sql
 async def _(event):
     if event.fwd_from:
         return
-     warn_reason = event.pattern_match.group(1)
+    warn_reason = event.pattern_match.group(1)
     reply_message = await event.get_reply_message()
     limit, soft_warn = sql.get_warn_setting(event.chat_id)
     num_warns, reasons = sql.warn_user(reply_message.from_id, event.chat_id, warn_reason)
@@ -49,14 +51,14 @@ async def _(event):
         num_warns, reasons = result
         limit, soft_warn = sql.get_warn_setting(event.chat_id)
         if reasons:
-            text = "Yaas,This user has {}/{} warnings, for the following reasons:".format(num_warns, limit)
+            text = "This user has {}/{} warnings, for the following reasons:".format(num_warns, limit)
             text += "\r\n"
             text += reasons
             await event.reply(text)
         else:
-            await event.reply("Yass,This user has {} / {} warning, but no reasons for any of them.".format(num_warns, limit))
+            await event.reply("this user has {} / {} warning, but no reasons for any of them.".format(num_warns, limit))
     else:
-        await event.reply("`No,This user hasn't got any warnings!`")
+        await event.reply("`This user hasn't got any warnings!`")
 
 
 @borg.on(admin_cmd(pattern="rwarn",allow_sudo=True))
