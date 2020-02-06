@@ -8,8 +8,7 @@ import sys
 from telethon import events, functions, __version__
 from uniborg.util import admin_cmd
 
-
-@borg.on(admin_cmd(pattern="info ?(.*)", allow_sudo=True))  # pylint:disable=E0602
+@borg.on(events.NewMessage(pattern=r"\.info(.*)",incoming=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -18,11 +17,11 @@ async def _(event):
         s_help_string = borg._plugins[splugin_name].__doc__
     else:
         s_help_string = "****:"
-    help_string = """@kaitoxd ( **Custom Built By** @meanii ) \n**Verified Account**: ✅\n
+    help_string = """@allukabot 👨🏻‍💻\n👉🏻**Custom Built By** @meanii\n
 Pithun {}
 Talethrun {}
  
-**Custom Built Fork**: https://github.com/mitshuhataki/kaito """.format(
+ """.format(
         sys.version,
         __version__
     )
@@ -43,11 +42,11 @@ Talethrun {}
         await event.delete()
 
 
-@borg.on(admin_cmd(pattern="dc"))  # pylint:disable=E0602
+@borg.on(admin_cmd(pattern="dc")) 
 async def _(event):
     if event.fwd_from:
         return
-    result = await borg(functions.help.GetNearestDcRequest())  # pylint:disable=E0602
+    result = await borg(functions.help.GetNearestDcRequest())  
     await event.edit(f"Country : `{result.country}`\n"
                      f"Nearest Datacenter : `{result.nearest_dc}`\n"
                      f"This Datacenter : `{result.this_dc}`")
@@ -60,10 +59,10 @@ async def _(event):
     result = await borg(functions.help.GetConfigRequest())  # pylint:disable=E0602
     result = result.stringify()
     logger.info(result)  # pylint:disable=E0602
-    await event.reply("Haye, My name is **K A I T O** 👨🏻‍💻!!\n👉🏻I'm Userbot Customized by @meanii\n👉🏻You can use following cammands.\n\n👉🏻`.ud` To urban dictionary\n👉🏻`.ddg` <Query> To Duck Duck GO 🦆\n👉🏻`.gs` <Query> To Google Search\n👉🏻`.gi` <Query> To Google Image Search\n👉🏻`.grs`(with reply image) To Google Reverse Search\n👉🏻`.qbot` To Quotly\n👉🏻`.anii` To Animation sticker to Video\n👉🏻`.download` To Downlaod file\n👉🏻`.upload` To upload file\n👉🏻`.howto`<plugin name> To know about and cmds about Plugins\n👉🏻`.help` For your help! 😉\n👉🏻 `.info` to know about more.\n\n🌚**Sudo Commands**\n👉🏻`.stat` To know how many connected current users, bots, channels & Groups. \n👉🏻`.exec` <cmd> For Bash Commands.\n👉🏻`.cpin` To pin message.\n👉🏻`.type`<Your Words> To typing as typewriter.\n👉🏻`.spam`<num> To Spam")
+    await event.reply("Haye, I'm **αℓℓυкα Zᴏʟᴅʏᴄᴋ™** 👨🏻‍💻!!\n👉🏻**My most of the useful commands are open for all users.**\n👇🏻You can use following this cammands.\n\n👉🏻`.ud` To urban dictionary\n👉🏻`.ddg` <Query> To Duck Duck GO 🦆\n👉🏻`.gs` <Query> To Google Search\n👉🏻`.gi` <Query> To Google Image Search\n👉🏻`.grs`(with reply image) To Google Reverse Search\n👉🏻`.qbot` To Quotly\n👉🏻`.anii` To Animation sticker to Video\n👉🏻`.howto`<plugin name> To know about and cmds about Plugins\n👉🏻`.help` For your help! 😉\n👉🏻 `.info` to know about more.\n\n🌚**Sudo Commands**\n👉🏻`.stat` To know how many connected current users, bots, channels & Groups. \n👉🏻`.exec` <cmd> For Bash Commands.\n👉🏻`.cpin` To pin message.\n👉🏻`.type`<Your Words> To typing as typewriter.\n👉🏻`.spam`<word><num> (num<100) To repeat same message multiple of times.\n👉🏻`.download` To Downlaod file\n👉🏻`.upload` To upload file")
 
 
-@borg.on(events.NewMessage(pattern=r"\.howto?(.*)",incoming=True))
+@borg.on(events.NewMessage(pattern=r"\.howto ?(.*)",incoming=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -77,4 +76,4 @@ async def _(event):
             plugin_syntax = f"No DOCSTRING has been setup for {plugin_name} plugin."
     else:
         plugin_syntax = "Enter valid **Plugin** name.\nDo `.stdplugins` or `.info` to get list of valid plugin names."
-    await event.edit(plugin_syntax)
+        await event.reply(plugin_syntax)
