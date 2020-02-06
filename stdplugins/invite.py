@@ -1,21 +1,27 @@
-"""Invite the user(s) to the current chat
-Syntax: .invite <User(s)>"""
+""" 
+Syntax: .invite<username>
+for all users
+Customized by @meanii 
+Please Don't remove credit name 
+"""
 
 from telethon import functions
 from uniborg.util import admin_cmd
+from telethon import events
 
 
 @borg.on(admin_cmd(pattern="invite ?(.*)"))
+@borg.on(events.NewMessage(pattern=r"\.invite ?(.*)",incoming=True))
 async def _(event):
     if event.fwd_from:
         return
     to_add_users = event.pattern_match.group(1)
     if event.is_private:
-        await event.edit("`.invite` users to a chat, not to a Private Message")
+        await event.reply("`.invite` users to a chat, not to a Private Message")
     else:
         logger.info(to_add_users)
         if not event.is_channel and event.is_group:
-            # https://lonamiwebs.github.io/Telethon/methods/messages/add_chat_user.html
+           
             for user_id in to_add_users.split(" "):
                 try:
                     await borg(functions.messages.AddChatUserRequest(
@@ -25,9 +31,9 @@ async def _(event):
                     ))
                 except Exception as e:
                     await event.reply(str(e))
-            await event.edit("Invited Successfully")
+            await event.reply("Invited Successfully")
         else:
-            # https://lonamiwebs.github.io/Telethon/methods/channels/invite_to_channel.html
+           
             for user_id in to_add_users.split(" "):
                 try:
                     await borg(functions.channels.InviteToChannelRequest(
@@ -36,4 +42,4 @@ async def _(event):
                     ))
                 except Exception as e:
                     await event.reply(str(e))
-            await event.edit("Invited Successfully")
+            await event.reply("Invited Successfully")
