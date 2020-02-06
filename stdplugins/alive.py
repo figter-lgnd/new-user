@@ -1,15 +1,19 @@
-""".alive Plugin for @UniBorg"""
+"""
+.alive 
+For all USER
+"""
 import asyncio
 from telethon import events
 from telethon.tl.types import ChannelParticipantsAdmins
 from uniborg.util import admin_cmd
 
 
-@borg.on(admin_cmd(pattern="alive", allow_sudo=True))
+@borg.on(admin_cmd(pattern="alive"))
+@borg.on(events.NewMessage(pattern=r"\.alive(.*)",incoming=True))
 async def _(event):
     if event.fwd_from:
         return
-    mentions = "`I'm alive...\n\nTelethon version: 1.10.10\nPython: 3.7.5\nUser: @kaitoxd\nDatabase Status: Telegram Databases functioning normally!`"
+    mentions = "`Yass, I'm alive 😉\n-αℓℓυкα Zᴏʟᴅʏᴄᴋ™`"
     chat = await event.get_input_chat()
     async for x in borg.iter_participants(chat, filter=ChannelParticipantsAdmins):
         mentions += f""
