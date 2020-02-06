@@ -64,6 +64,7 @@ async def _(event):
 
 @borg.on(admin_cmd(pattern="howto ?(.*)"))
 @borg.on(events.NewMessage(pattern=r"\.howto ?(.*)",incoming=True))
+
 async def _(event):
     if event.fwd_from:
         return
@@ -77,4 +78,4 @@ async def _(event):
             plugin_syntax = f"No DOCSTRING has been setup for {plugin_name} plugin."
     else:
         plugin_syntax = "Enter valid **Plugin** name.\nDo `.stdplugins` or `.info` to get list of valid plugin names."
-        await event.reply(plugin_syntax)
+    await event.reply(plugin_syntax)
