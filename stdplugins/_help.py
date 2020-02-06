@@ -8,6 +8,7 @@ import sys
 from telethon import events, functions, __version__
 from uniborg.util import admin_cmd
 
+@borg.on(admin_cmd(pattern="info ?(.*)"))
 @borg.on(events.NewMessage(pattern=r"\.info(.*)",incoming=True))
 async def _(event):
     if event.fwd_from:
@@ -42,16 +43,16 @@ Talethrun {}
         await event.delete()
 
 
-@borg.on(admin_cmd(pattern="dc")) 
+@borg.on(admin_cmd(pattern="dc",allow_sudo=True)) 
 async def _(event):
     if event.fwd_from:
         return
     result = await borg(functions.help.GetNearestDcRequest())  
-    await event.edit(f"Country : `{result.country}`\n"
+    await event.reply(f"Country : `{result.country}`\n"
                      f"Nearest Datacenter : `{result.nearest_dc}`\n"
                      f"This Datacenter : `{result.this_dc}`")
 
-
+@borg.on(admin_cmd(pattern="help(.*)"))
 @borg.on(events.NewMessage(pattern=r"\.help(.*)",incoming=True))
 async def _(event):
     if event.fwd_from:
@@ -62,6 +63,7 @@ async def _(event):
     await event.reply("Haye, I'm **αℓℓυкα Zᴏʟᴅʏᴄᴋ™** 👨🏻‍💻!!\n👉🏻**My most of the useful commands are open for all users.**\n👇🏻You can use following this cammands.\n\n👉🏻`.ud` To urban dictionary\n👉🏻`.ddg` <Query> To Duck Duck GO 🦆\n👉🏻`.gs` <Query> To Google Search\n👉🏻`.gi` <Query> To Google Image Search\n👉🏻`.grs`(with reply image) To Google Reverse Search\n👉🏻`.qbot` To Quotly\n👉🏻`.anii` To Animation sticker to Video\n👉🏻`.howto`<plugin name> To know about and cmds about Plugins\n👉🏻`.help` For your help! 😉\n👉🏻 `.info` to know about more.\n\n🌚**Sudo Commands**\n👉🏻`.stat` To know how many connected current users, bots, channels & Groups. \n👉🏻`.exec` <cmd> For Bash Commands.\n👉🏻`.cpin` To pin message.\n👉🏻`.type`<Your Words> To typing as typewriter.\n👉🏻`.spam`<word><num> (num<100) To repeat same message multiple of times.\n👉🏻`.download` To Downlaod file\n👉🏻`.upload` To upload file")
 
 
+@borg.on(admin_cmd(pattern="howto ?(.*)"))
 @borg.on(events.NewMessage(pattern=r"\.howto ?(.*)",incoming=True))
 async def _(event):
     if event.fwd_from:
