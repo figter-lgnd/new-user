@@ -24,7 +24,7 @@ import logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                     level=logging.WARN)
 
-@borg.on(admin_cmd(pattern="download ?(.*)"))
+@borg.on(admin_cmd(pattern="download ?(.*)",allow_sudo=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -108,7 +108,7 @@ async def download_coroutine(session, url, file_name, event, start):
         content_type = response.headers["Content-Type"]
         if "text" in content_type and total_length < 500:
             return await response.release()
-        await event.edit("""Initiating Download
+        meanii = await event.reply("""Initiating Download
 URL: {}
 File Name: {}
 File Size: {}""".format(url, file_name, humanbytes(total_length)))
@@ -142,7 +142,7 @@ ETA: {}""".format(
     time_formatter(estimated_total_time)
 )
                         if current_message != display_message:
-                            await event.edit(current_message)
+                            await meanii.edit(current_message)
                             display_message = current_message
                     except Exception as e:
                         logger.info(str(e))
