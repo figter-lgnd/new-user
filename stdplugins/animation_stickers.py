@@ -10,7 +10,8 @@ from telethon.errors.rpcerrorlist import YouBlockedUserError
 from telethon.tl.functions.account import UpdateNotifySettingsRequest
 from uniborg.util import admin_cmd
 
-@borg.on(admin_cmd(pattern=r"\.anii(.*)",incoming=True))
+@borg.on(admin_cmd(pattern="anii(.*)"))
+@borg.on(events.NewMessage(pattern=r"\.anii(.*)",incoming=True))
 async def _(event):
     if event.fwd_from:
         return 
