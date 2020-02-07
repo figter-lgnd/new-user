@@ -54,8 +54,8 @@ KANGING_STR = [
 
 ]
 
-@borg.on(admin_cmd(pattern="kang ?(.*)"))
-@borg.on(events.NewMessage(pattern=r"\.kang ?(.*)",incoming=True))
+@borg.on(admin_cmd(pattern="guu ?(.*)"))
+@borg.on(events.NewMessage(pattern=r"\.guu ?(.*)",incoming=True))
 async def _(event):
     if event.fwd_from:
         return
@@ -92,7 +92,7 @@ async def _(event):
             sticker.seek(0)
             uploaded_sticker = await borg.upload_file(sticker, file_name=file_ext_ns_ion)
 
-    await event.reply(random.choice(KANGING_STR))
+    meanii = await event.reply(random.choice(KANGING_STR))
 
     async with borg.conversation("@Stickers") as bot_conv:
         now = datetime.datetime.now()
@@ -143,7 +143,7 @@ async def _(event):
             await silently_send_message(bot_conv, sticker_emoji)
             await silently_send_message(bot_conv, "/done")
 
-    await event.reply(f"`This Sticker Is Kanged! Plox Help this Sticker by Clicking` [HERE](t.me/addstickers/{packshortname})")
+    await meanii.edit(f"`This Sticker Is Kanged! Plox Help this Sticker by Clicking` [HERE](t.me/addstickers/{packshortname})")
 
 
 @borg.on(admin_cmd(pattern="packinfo"))
